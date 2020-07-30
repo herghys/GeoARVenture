@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="kubus_luas" size="700.000000 897.864319" />
+    <ImageTarget name="balok_luas" size="700.000000 867.354370" />
+    <ImageTarget name="prisma_luas" size="700.000000 1049.486084" />
+    <ImageTarget name="limas_luas" size="700.000000 890.037354" />
+    <ImageTarget name="limas_volume" size="700.000000 887.826111" />
+    <ImageTarget name="limas_jaring" size="700.000000 910.445862" />
+    <ImageTarget name="limas_unsur" size="700.000000 1049.486084" />
+    <ImageTarget name="prisma_volume" size="700.000000 843.801636" />
+    <ImageTarget name="prisma_jaring" size="700.000000 921.005127" />
+    <ImageTarget name="prisma_unsur" size="700.000000 1049.486084" />
+    <ImageTarget name="balok_volume" size="700.000000 833.955688" />
+    <ImageTarget name="balok_jaring" size="700.000000 853.882935" />
+    <ImageTarget name="balok_unsur" size="700.000000 1049.486084" />
+    <ImageTarget name="kubus_volume" size="700.000000 935.163391" />
+    <ImageTarget name="kubus_jaring" size="700.000000 849.643677" />
+    <ImageTarget name="kubus_unsur" size="700.000000 1046.929810" />
+    <ImageTarget name="kubus1" size="0.100000 0.125000" />
+  </Tracking>
+</QCARConfig>
