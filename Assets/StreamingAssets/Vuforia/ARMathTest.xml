@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="Vol_Prisma" size="1.000000 1.499266" />
+    <ImageTarget name="Vol_Limas" size="1.000000 1.499266" />
+    <ImageTarget name="Vol_Cubicle" size="1.000000 1.499266" />
+    <ImageTarget name="Unsur_Prisma" size="1.000000 1.499266" />
+    <ImageTarget name="Unsur_Limas" size="1.000000 1.499266" />
+    <ImageTarget name="Unsur_Cubicle" size="1.000000 1.497067" />
+    <ImageTarget name="LP_Prisma" size="1.000000 1.499266" />
+    <ImageTarget name="LP_Limas" size="1.000000 1.499266" />
+    <ImageTarget name="LP_Cubicle" size="1.000000 1.497067" />
+  </Tracking>
+</QCARConfig>
