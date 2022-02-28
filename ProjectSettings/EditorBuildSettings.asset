@@ -12,12 +12,30 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9bd48ed66d72187418e55087018f1564
   - enabled: 1
-    path: Assets/Scenes/AR/ARLuasPermukaan.unity
+    path: Assets/Scenes/AR/AR_LP_Kubus.unity
     guid: f25004abf9e2063469e77bc51393f667
   - enabled: 1
-    path: Assets/Scenes/AR/ARUnsur.unity
+    path: Assets/Scenes/AR/AR_LP_Limas.unity
+    guid: 265eecf96cab04347b83ed28c52b5139
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_LP_Prisma.unity
+    guid: bad809b199cf37f47bad7b6f1a43940b
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_Unsur_Kubus.unity
     guid: 29b189c392e97ab418d5032f0af4032d
   - enabled: 1
-    path: Assets/Scenes/AR/ARVolume.unity
+    path: Assets/Scenes/AR/AR_Unsur_Limas.unity
+    guid: 5852677d24939fc4380353da705d843b
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_Unsur_Prisma.unity
+    guid: ed268fe45be0a2b4b9ad177aa4ba2f21
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_Volume_Kubus.unity
     guid: 9ab7715a123c057429adf54ee46ac1e5
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_Volume_Limas.unity
+    guid: aa716d41c7093c1439b3a65ff69b77e4
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_Volume_Prisma.unity
+    guid: 27508cdf134c3984eb476e6f6d8d6077
   m_configObjects: {}
