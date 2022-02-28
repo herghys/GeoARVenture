@@ -1,61 +1,65 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
+using ARMath.Managers;
+using System.Collections;
 
 namespace ARMath.UI
 {
-    [RequireComponent(typeof(CanvasGroup))]
     public class UIWindow : MonoBehaviour
     {
         private Tweener tweener;
         [SerializeField] bool isActive = false;
         public bool IsActive { get { return isActive; } }
-        [SerializeField] private CanvasGroup canvasGroup;
 
-        public int windowIndex;
+        public bool mayDisable = true;
+        [SerializeField] UIManager ui;
 
-        private void Awake()
+        enum MoveOrientation
         {
-            canvasGroup = GetComponent<CanvasGroup>();
-            CloseUI();
+            X, Y
         }
 
+        [SerializeField] MoveOrientation moveOrientation;
+
+        #region Enable/Disable
         public void Enable()
         {
-            OpenUI();
+            Vector3 direction = Vector3.zero;
+            ControlUI(direction, active: true);
         }
 
         public void Disable()
         {
-            CloseUI();
-        }
-        async void OpenUI()
-        {
-            isActive = true;
-            SetCanvasGroup(1, true);
-            await TweenScaleUI(1);
-        }
+            Rect targetRect = UIManager.SharedInstance.mainCanvas.rect;
+            Vector3 direction = new Vector3();
 
-        async void CloseUI()
-        {
-            isActive = false;
-            await TweenScaleUI(0.25f);
-            SetCanvasGroup(0, false);
+            switch (moveOrientation)
+            {
+                case MoveOrientation.X:
+                    direction = new Vector3(-targetRect.width-10, 0,0);
+                    break;
+                case MoveOrientation.Y:
+                    direction = new Vector3(0, -targetRect.height-10,0);
+                    break;
+            }
+            if(mayDisable)
+                ControlUI(direction);
         }
-
-        private async void SetCanvasGroup(float alpha, bool interactable)
+        #endregion
+        #region OpenClose
+        void ControlUI(Vector3 direction, float duration = 0.5f, bool active = false)
         {
-            canvasGroup.alpha = alpha;
-            canvasGroup.interactable = interactable;
-            canvasGroup.blocksRaycasts = interactable;
-            await Task.Yield();
+            StartCoroutine(MoveWindow(direction, duration));
+            isActive = active;
         }
+        #endregion
 
-        private async Task TweenScaleUI(float scale, float duration = 0.15f)
+        private IEnumerator MoveWindow(Vector3 orientation, float _duration)
         {
-            tweener = transform.DOScale(scale, duration);
+            tweener = transform.DOLocalMove(orientation, _duration);
             tweener.SetEase(Ease.InOutSine);
-            await tweener.AsyncWaitForCompletion();
+            yield return tweener.AsyncWaitForCompletion();
         }
     }
 }

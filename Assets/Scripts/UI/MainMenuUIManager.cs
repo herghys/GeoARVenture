@@ -1,26 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine;
-using ARMath.UI;
-
 namespace ARMath.Managers
 {
-    public class MainMenuUIManager : MonoBehaviour
+    public class MainMenuUIManager : UIManager
     {
-        [SerializeField] internal List<UIWindow> contextWindows;
-        [SerializeField] Canvas loadingCanvas;
-        internal void OpenUI(UIWindow window)
+        private void Awake()
         {
-            foreach (var item in contextWindows)
-            {
-                if(item != window)
-                    item.Disable();
-            }
-            window.Enable();
-        }
-
-        internal void CloseUI(UIWindow window)
-        {
-            window.Disable();
+            instance = this;
         }
     }
 }
