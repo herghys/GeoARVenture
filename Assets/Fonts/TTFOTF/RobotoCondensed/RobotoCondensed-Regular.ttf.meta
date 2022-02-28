@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: fa5eee6b223848f4eb4182545188ef17
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Roboto Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c2e58550e47ac014a8ce96319bda11d4, type: 3}
+  - {fileID: 12800000, guid: 25d67231ada3ac749a0bbf5c750d9426, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
