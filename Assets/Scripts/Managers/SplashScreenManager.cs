@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
-
-using DG.Tweening;
 
 public class SplashScreenManager : MonoBehaviour
 {
+    [Header("Splash Loader")]
     [SerializeField] string scene;
     [SerializeField] float totalTime = 2f;
-    [SerializeField] SceneFader fader;
     AsyncOperation loadOp;
     float activeTime = 0f;
-
+    
+    [Header("Fader")]
+    [SerializeField] Image img;
+    [SerializeField] AnimationCurve curve;
+    [SerializeField] float curveTime = 1f;
     private void Start()
     {
         StartCoroutine(StartLoading());
@@ -22,12 +25,24 @@ public class SplashScreenManager : MonoBehaviour
         activeTime += Time.deltaTime;
         var progress = Mathf.Clamp01(activeTime / totalTime);
 
-        print(progress);
-
         if (progress == 1f )
         {
-            fader.FadeTo(scene, loadOp);
+            StartCoroutine(FadeOut());
         }
+    }
+
+    IEnumerator FadeOut()
+    {
+        float t = 0f;
+
+        while (t < curveTime)
+        {
+            t += Time.deltaTime;
+            float a = curve.Evaluate(t);
+            img.color = new Color(0f, 0f, 0f, a);
+            yield return 0;
+        }
+        loadOp.allowSceneActivation = true;
     }
 
     IEnumerator StartLoading()

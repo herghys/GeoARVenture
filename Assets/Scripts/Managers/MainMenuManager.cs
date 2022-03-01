@@ -1,18 +1,25 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ARMath.UI;
+using System.Collections;
+using System.Threading.Tasks;
 
 namespace ARMath.Managers
 {
     public class MainMenuManager : MonoBehaviour
     {
-        MainMenuUIManager ui;
+        [SerializeField] MainMenuUIManager ui;
+        [SerializeField] SceneFader fader;
+
+        AsyncOperation loadOp;
 
         private void Awake()
         {
-            ui = GetComponent<MainMenuUIManager>();
+            if(ui == null)
+                ui = GetComponent<MainMenuUIManager>();
         }
 
+        #region Context Menu Control
         public void OpenContextMenu(UIWindow window)
         {
             ui.OpenUI(window);
@@ -22,11 +29,33 @@ namespace ARMath.Managers
         {
             ui.CloseUI(window);
         }
+        #endregion
 
+        #region Scene Loader
         public void LoadScene(string scene)
         {
-            SceneManager.LoadScene(scene);
+            ui.StartLoadLevel();
+            StartCoroutine(Load(scene));
         }
+
+        IEnumerator Load(string scene)
+        {
+            loadOp = SceneManager.LoadSceneAsync(scene);
+            loadOp.allowSceneActivation = false;
+            while (!loadOp.isDone)
+            {
+                float progress = Mathf.Clamp01(loadOp.progress / 0.9f);
+                ui.SetLoadSliderValue = progress;
+                if (loadOp.progress >= 0.9f)
+                {
+                    yield return new WaitForSeconds(1);
+                    break;
+                }
+                yield return new WaitForSeconds(1);
+            }
+            ui.StartFade?.Invoke(loadOp);
+        }
+        #endregion
 
         public void CloseApps()
         {
