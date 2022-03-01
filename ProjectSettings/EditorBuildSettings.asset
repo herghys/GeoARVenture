@@ -38,4 +38,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AR/AR_Volume_Prisma.unity
     guid: 27508cdf134c3984eb476e6f6d8d6077
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 954542335471a4142a70336163f3bfb4, type: 2}
