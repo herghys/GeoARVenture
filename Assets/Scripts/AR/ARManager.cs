@@ -1,44 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Vuforia;
+using UnityEngine.SceneManagement;
 
-namespace Cubex.AR
+namespace ARMath.AR.Manager
 {
-    public class ARManager : DefaultTrackableEventHandler
+    public class ARManager : MonoBehaviour
     {
-        [SerializeField]
-        protected GameObject teksPetunjuk;
-
-        // Start is called before the first frame update
-        void Start()
+        public void GoToScene(string scene)
         {
-
-        }
-
-        
-        protected virtual void OnTrackableStatusChanged(TrackableBehaviour.StatusChangeResult statusChangeResult)
-        {
-            m_PreviousStatus = statusChangeResult.PreviousStatus;
-            m_NewStatus = statusChangeResult.NewStatus;
-
-            Debug.Log("HAHAHAHAH");
-            if (m_NewStatus == TrackableBehaviour.Status.DETECTED ||
-                m_NewStatus == TrackableBehaviour.Status.TRACKED ||
-                m_NewStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
-            {
-                teksPetunjuk.SetActive(false);
-            }
-            else
-            {
-                teksPetunjuk.SetActive(true);
-            }
-        }
-      
-        // Update is called once per frame
-        void Update()
-        {
-
+            SceneManager.LoadScene(scene);
         }
     }
 }
