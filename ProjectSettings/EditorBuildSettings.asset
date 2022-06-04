@@ -19,9 +19,12 @@ EditorBuildSettings:
     guid: 265eecf96cab04347b83ed28c52b5139
   - enabled: 1
     path: Assets/Scenes/AR/AR_LP_Prisma.unity
+    guid: 217b0efdd2b96b14096a37e51c22ed95
+  - enabled: 1
+    path: Assets/Scenes/AR/AR_LP_PrismaOld.unity
     guid: bad809b199cf37f47bad7b6f1a43940b
   - enabled: 1
-    path: Assets/Scenes/AR/AR_Unsur_Kubus.unity
+    path: Assets/Scenes/AR/AR_Unsur_Kubus1111.unity
     guid: 29b189c392e97ab418d5032f0af4032d
   - enabled: 1
     path: Assets/Scenes/AR/AR_Unsur_Limas.unity

@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Vuforia;
 
 namespace ARMath.AR
 {
     public class TargetHandler : DefaultObserverEventHandler
     {
-        [SerializeField] CanvasGroup group;
+        [SerializeField] GameObject group;
         [SerializeField] GeometryShapes shapes;
 
         protected override void OnTrackingFound()
@@ -25,20 +22,24 @@ namespace ARMath.AR
         public void TargetFound()
         {
             print($"{shapes} found");
-            CanvasGroupEnabler(1, true);
+            CanvasGroupEnabler(true);
         }
 
         public void TargetLost()
         {
             print($"{shapes} lost");
-            CanvasGroupEnabler(0, false);
+            CanvasGroupEnabler(false);
         }
 
-        public void CanvasGroupEnabler(float alpha, bool _enabled)
+        public void CanvasGroupEnabler(bool _enabled)
         {
-            group.alpha = alpha;
-            group.blocksRaycasts = enabled;
-            group.interactable = enabled;
+            group.SetActive(_enabled);
+            /*if (group is not null)
+            {
+                group.alpha = alpha;
+                group.blocksRaycasts = enabled;
+                group.interactable = enabled;
+            }*/
         }
     }
 }
