@@ -15,6 +15,7 @@ public class ARShapeLP : MonoBehaviour
     [SerializeField] GameObject playAnimUI;
     public UnityEvent OnRemoveEvent;
     IEnumerator animationCoroutine;
+
     #region Lists
     [SerializeField] List<GameObject> sisi;
     [SerializeField] List<GameObject> jaring;
@@ -32,7 +33,9 @@ public class ARShapeLP : MonoBehaviour
     }
 
     private void Start()
-     => CheckSides();
+    {
+        CheckSides();
+    }
     #endregion
     #region Public
     public void ControlSide(int index)
@@ -45,7 +48,25 @@ public class ARShapeLP : MonoBehaviour
 
     public void CheckSides()
     {
+        if (!sisiActive.All(val => val == true))
+        {
+            playAnimUI.SetActive(false);
+            return;
+        }
+
         if (sisiActive.Any(val => val == false))
+        {
+            playAnimUI.SetActive(false);
+            animationCoroutine = IE_StopAnimation();
+        }
+        else 
+        {
+            playAnimUI.SetActive(true);
+            animationCoroutine = null;
+        }
+
+        PlayCoroutine(animationCoroutine);
+        /*if (sisiActive.Any(val => val == false))
         {
             playAnimUI.SetActive(false);
             animationCoroutine = IE_StopAnimation();
@@ -56,17 +77,19 @@ public class ARShapeLP : MonoBehaviour
             playAnimUI.SetActive(true);
             animationCoroutine = null;
         }
+        PlayCoroutine(animationCoroutine);*/
     }
 
     public void PlayAnimation()
     {
+        animator.ResetTrigger(stopAnimTrigger);
         animationCoroutine = IE_StartAnimation();
         PlayCoroutine(animationCoroutine);
-        animator.ResetTrigger(stopAnimTrigger);
     }
 
     public void StopAnimation()
     {
+        animator.ResetTrigger(startAnimTrigger);
         animationCoroutine = IE_StopAnimation();
         PlayCoroutine(animationCoroutine);
     }
@@ -76,7 +99,6 @@ public class ARShapeLP : MonoBehaviour
     {
         sisi[index].SetActive(true);
         sisiActive[index] = sisi[index].activeSelf;
-        animator.ResetTrigger(stopAnimTrigger);
     }
 
     private void RemoveSides(int index)
@@ -84,47 +106,60 @@ public class ARShapeLP : MonoBehaviour
         sisi[index].SetActive(false);
         sisiActive[index] = sisi[index].activeSelf;
         OnRemoveEvent?.Invoke();
-        animator.ResetTrigger(stopAnimTrigger);
     }
 
     #region  Coroutines
     IEnumerator IE_StartAnimation()
     {
+        for (int i = 0; i < texts.Count; i++)
+        {
+            yield return new WaitForSeconds(0.25f);
+            texts[i].SetActive(true);
+        }
+        yield return new WaitForEndOfFrame();
         if (jaring.Count != 0)
         {
             foreach (var item in jaring)
             {
+                yield return new WaitForSeconds(0.25f);
                 item.gameObject.SetActive(true);
-                yield return new WaitForEndOfFrame();
             }
         }
-        yield return new WaitForSeconds(0.5f);
-        foreach (var text in texts)
-        {
-            text.SetActive(true);
-            yield return new WaitForEndOfFrame();
-        }
-        animator.SetTrigger(startAnimTrigger);
         yield return new WaitForEndOfFrame();
+
+        animator.ResetTrigger(stopAnimTrigger);
+        animator.SetTrigger(startAnimTrigger);
+        while (!animator.IsInTransition(0))
+        {
+            yield return null;
+        }
+        animator.ResetTrigger(startAnimTrigger);
+        yield return null;
     }
+
 
     IEnumerator IE_StopAnimation()
     {
         animator.SetTrigger(stopAnimTrigger);
+        while (!animator.IsInTransition(0))
+        {
+            yield return null;
+        }
         yield return new WaitForEndOfFrame();
         if (jaring.Count != 0)
         {
             foreach (var item in jaring)
             {
+                yield return new WaitForSeconds(0.25f);
                 item.gameObject.SetActive(false);
-                yield return new WaitForEndOfFrame();
             }
         }
         foreach (var text in texts)
         {
+            yield return new WaitForSeconds(0.25f);
             text.SetActive(false);
-            yield return new WaitForEndOfFrame();
         }
+        animator.ResetTrigger(stopAnimTrigger);
         yield return null;
     }
     #endregion
