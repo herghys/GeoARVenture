@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(ObjectRotator))]
 public class ObjectZoom : MonoBehaviour
 {
     [SerializeField] float scrollSpeed = 0.05f;
-    [SerializeField] float touchSpeed = 0.0025f;
+    [SerializeField] ObjectRotator rotator;
 
     [SerializeField] float scale;
     [SerializeField] float initialScale = 1f;
-    [SerializeField] float minScale = 0.01f;
-    [SerializeField] float maxScale = 50f;
+     float minScale = 0.2f;
+     float maxScale = 10f;
 
     [SerializeField] TextMeshProUGUI textDebug;
 
@@ -20,10 +22,11 @@ public class ObjectZoom : MonoBehaviour
     private void Awake()
     {
         scale = initialScale;
+        if (rotator is null) rotator = GetComponent<ObjectRotator>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.touchSupported)
         {
@@ -42,11 +45,11 @@ public class ObjectZoom : MonoBehaviour
 
                 // get offset value
                 float deltaDistance = oldTouchDistance - currentTouchDistance;
-                Debug.Log(deltaDistance);
-
-                textDebug.text = deltaDistance.ToString();
-                TouchZoom(deltaDistance);
-                //Zoom(deltaDistance, TouchZoomSpeed);
+                
+                if (deltaDistance > 0.1f)
+                    Zoom(false);
+                if (deltaDistance < -0.2f)
+                    Zoom(true);
             }
         }
         {
@@ -54,34 +57,38 @@ public class ObjectZoom : MonoBehaviour
             Debug.Log(scroll);
 
             if (scroll < -0.5f)
-                ScrollZoom(false);
+                Zoom(false);
             else if (scroll > 0.5f)
-                ScrollZoom();
+                Zoom();
         }
     }
 
-    void TouchZoom(float deltaMagnitudeDiff)
+    void Zoom(bool zoomIn = true)
     {
-        if (transform.localScale.x < minScale || transform.localScale.y < minScale || transform.localScale.z < minScale)
-            transform.localScale = Vector3.one * minScale;
-        else if (transform.localScale.x > maxScale || transform.localScale.y > maxScale || transform.localScale.z > maxScale)
-            transform.localScale = Vector3.one * maxScale;
+        if (scale < minScale)
+        {
+            scale = minScale + 0.015f;
+            return;
+        }
 
-        scale += deltaMagnitudeDiff * -touchSpeed;
-        transform.localScale = Vector3.one * scale;
-    }
-
-    void ScrollZoom(bool zoomIn = true)
-    {
-        if (transform.localScale.x < minScale || transform.localScale.y < minScale || transform.localScale.z < minScale)
-            transform.localScale = Vector3.one * minScale;
-        else if (transform.localScale.x > maxScale || transform.localScale.y > maxScale || transform.localScale.z > maxScale)
-            transform.localScale = Vector3.one * maxScale;
+        if (scale > maxScale)
+        {
+            scale = maxScale - 0.015f;
+            return;
+        }
 
         if (zoomIn)
+        {
             scale += scrollSpeed;
+            rotator.mobileRotationSpeed = rotator.mobileRotationSpeed += 7.5f;
+        }
         else
+        {
             scale -= scrollSpeed;
+            rotator.mobileRotationSpeed = rotator.mobileRotationSpeed -= 7.5f;
+        }
+
+        textDebug.text = scale.ToString();
 
         transform.localScale = (Vector3.one * scale);
         //transform.localScale = Vector3.one * speed; 
