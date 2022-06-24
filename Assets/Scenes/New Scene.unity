@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pcRotationSpeed: 100
-  mobileRotationSpeed: 100
+  mobileRotationSpeed: 80
   isDragging: 0
   cam: {fileID: 1250792116}
   rb: {fileID: 1838584755}
@@ -827,8 +827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509dc4052c4d4ab40af13714beeac53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 0
+  scrollSpeed: 0.01
+  touchSpeed: 0.0015
+  scale: 1
   initialScale: 1
   minScale: 0.01
-  maxScale: 50
-  textDebug: {fileID: 0}
+  maxScale: 20
+  textDebug: {fileID: 1490143686}

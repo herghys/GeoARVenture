@@ -7,7 +7,7 @@ using TMPro;
 public class ObjectZoom : MonoBehaviour
 {
     [SerializeField] float scrollSpeed = 0.05f;
-    [SerializeField] float touchSpeed = 0.05f;
+    [SerializeField] float touchSpeed = 0.0025f;
 
     [SerializeField] float scale;
     [SerializeField] float initialScale = 1f;
@@ -62,18 +62,21 @@ public class ObjectZoom : MonoBehaviour
 
     void TouchZoom(float deltaMagnitudeDiff)
     {
-        if (transform.localScale.x <= minScale || transform.localScale.x >= maxScale)
-            return;
+        if (transform.localScale.x < minScale || transform.localScale.y < minScale || transform.localScale.z < minScale)
+            transform.localScale = Vector3.one * minScale;
+        else if (transform.localScale.x > maxScale || transform.localScale.y > maxScale || transform.localScale.z > maxScale)
+            transform.localScale = Vector3.one * maxScale;
 
-        scale += deltaMagnitudeDiff * -scrollSpeed;
+        scale += deltaMagnitudeDiff * -touchSpeed;
         transform.localScale = Vector3.one * scale;
     }
 
     void ScrollZoom(bool zoomIn = true)
     {
-        var transformScale = transform.localScale;
-        if (transformScale.x <= minScale || transformScale.x >= maxScale)
-            return;
+        if (transform.localScale.x < minScale || transform.localScale.y < minScale || transform.localScale.z < minScale)
+            transform.localScale = Vector3.one * minScale;
+        else if (transform.localScale.x > maxScale || transform.localScale.y > maxScale || transform.localScale.z > maxScale)
+            transform.localScale = Vector3.one * maxScale;
 
         if (zoomIn)
             scale += scrollSpeed;
@@ -81,6 +84,7 @@ public class ObjectZoom : MonoBehaviour
             scale -= scrollSpeed;
 
         transform.localScale = (Vector3.one * scale);
+        //transform.localScale = Vector3.one * speed; 
     }
 
 }

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ObjectRotator : MonoBehaviour
 {
     public float pcRotationSpeed = 100f;
-    public float mobileRotationSpeed = 100f;
+    public float mobileRotationSpeed = 80f;
 
     float speed;
     [SerializeField] bool isDragging;
@@ -40,6 +40,17 @@ public class ObjectRotator : MonoBehaviour
 #endif
     }
 
+    private void Update()
+    {
+        if (Input.touchSupported && Input.touchCount == 1)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                isDragging = true;
+            else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                isDragging = false;
+        }
+    }
+
     void SetRigidBody()
     {
         rb.drag = speed * 0.75f;
@@ -59,6 +70,7 @@ public class ObjectRotator : MonoBehaviour
         }
     }
 
+#if !UNITY_ANDROID
     private void OnMouseDrag()
     {
         isDragging = true;
@@ -68,6 +80,7 @@ public class ObjectRotator : MonoBehaviour
     {
         isDragging = false;
     }
+#endif
 
     private void FixedUpdate()
     {
