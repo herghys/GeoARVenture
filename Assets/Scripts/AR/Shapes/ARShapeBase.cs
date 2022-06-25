@@ -10,6 +10,18 @@ public static class ShapeHelper
 }
 
 [System.Serializable]
+public struct ARShapeUnsurStruct
+{
+    public Shape shapeType;
+    public MateriType materiType;
+
+    public Color changeColor;
+    public List<Color> baseColor;
+    public List<Material> baseMaterials;
+
+}
+
+[System.Serializable]
 public struct ARShapeVolumeStruct
 {
     public Shape shapeType;
