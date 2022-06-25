@@ -13,11 +13,8 @@ public class ObjectZoom : MonoBehaviour
 
     [SerializeField] float scale;
     [SerializeField] float initialScale = 1f;
-     float minScale = 0.2f;
-     float maxScale = 10f;
-
-    [SerializeField] TextMeshProUGUI textDebug;
-
+    [SerializeField] float minScale = 0.2f;
+    [SerializeField] float maxScale = 10f;
 
     private void Awake()
     {
@@ -25,25 +22,21 @@ public class ObjectZoom : MonoBehaviour
         if (rotator is null) rotator = GetComponent<ObjectRotator>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (Input.touchSupported)
         {
             if (Input.touchCount == 2)
             {
-
-                // get current touch positions
                 Touch tZero = Input.GetTouch(0);
                 Touch tOne = Input.GetTouch(1);
-                // get touch position from the previous frame
+                
                 Vector2 tZeroPrevious = tZero.position - tZero.deltaPosition;
                 Vector2 tOnePrevious = tOne.position - tOne.deltaPosition;
 
                 float oldTouchDistance = Vector2.Distance(tZeroPrevious, tOnePrevious);
                 float currentTouchDistance = Vector2.Distance(tZero.position, tOne.position);
 
-                // get offset value
                 float deltaDistance = oldTouchDistance - currentTouchDistance;
                 
                 if (deltaDistance > 0.1f)
@@ -68,6 +61,7 @@ public class ObjectZoom : MonoBehaviour
         if (scale < minScale)
         {
             scale = minScale + 0.015f;
+            rotator.mobileRotationSpeed = 5f;
             return;
         }
 
@@ -88,10 +82,15 @@ public class ObjectZoom : MonoBehaviour
             rotator.mobileRotationSpeed = rotator.mobileRotationSpeed -= 7.5f;
         }
 
-        textDebug.text = scale.ToString();
-
         transform.localScale = (Vector3.one * scale);
         //transform.localScale = Vector3.one * speed; 
     }
 
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        scale = initialScale;
+        if (rotator is null) rotator = GetComponent<ObjectRotator>();
+    }
+#endif
 }

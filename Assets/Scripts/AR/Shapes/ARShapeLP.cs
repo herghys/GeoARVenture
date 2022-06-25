@@ -10,11 +10,11 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Animator))]
 public class ARShapeLP : MonoBehaviour
 {
+    public ARShapeLuasStruct shapeStructure;
+
     [SerializeField] Animator animator;
     [SerializeField] bool isPlaying = false;
     [SerializeField] GameObject playAnimUI;
-    public UnityEvent OnRemoveEvent;
-    IEnumerator animationCoroutine;
 
     #region Lists
     [SerializeField] List<GameObject> sisi;
@@ -23,11 +23,18 @@ public class ARShapeLP : MonoBehaviour
     [SerializeField] List<GameObject> texts;
     #endregion
 
-    string startAnimTrigger = "StartAnimation";
-    string stopAnimTrigger = "StopAnimation";
+    public UnityEvent OnAddEvent;
+    public UnityEvent OnRemoveEvent;
+
+    IEnumerator animationCoroutine;
+    string startAnimTrigger;
+    string stopAnimTrigger;
     #region  Unity Default
     private void Awake()
     {
+        startAnimTrigger = ShapeHelper.StartAnimTrigger;
+        stopAnimTrigger = ShapeHelper.StopAnimTrigger;
+
         //animator = animator is null ? GetComponent<Animator>() : animator;
         animator?.GetComponent<Animator>();
     }
@@ -66,18 +73,6 @@ public class ARShapeLP : MonoBehaviour
         }
 
         PlayCoroutine(animationCoroutine);
-        /*if (sisiActive.Any(val => val == false))
-        {
-            playAnimUI.SetActive(false);
-            animationCoroutine = IE_StopAnimation();
-
-        }
-        else
-        {
-            playAnimUI.SetActive(true);
-            animationCoroutine = null;
-        }
-        PlayCoroutine(animationCoroutine);*/
     }
 
     public void PlayAnimation()
@@ -137,7 +132,6 @@ public class ARShapeLP : MonoBehaviour
         yield return null;
     }
 
-
     IEnumerator IE_StopAnimation()
     {
         animator.SetTrigger(stopAnimTrigger);
@@ -165,7 +159,7 @@ public class ARShapeLP : MonoBehaviour
     #endregion
 
     #region Helper
-    private void PlayCoroutine(IEnumerator coroutine)
+    public void PlayCoroutine(IEnumerator coroutine)
     {
         if (coroutine != null)
             StartCoroutine(coroutine);

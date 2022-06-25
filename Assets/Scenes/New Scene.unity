@@ -828,8 +828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.05
+  rotator: {fileID: 0}
   scale: 1
   initialScale: 1
   minScale: 0.2
-  maxScale: 19
+  maxScale: 5
   textDebug: {fileID: 1490143686}

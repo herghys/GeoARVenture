@@ -86,6 +86,14 @@ public class ObjectRotator : MonoBehaviour
     {
         Drag();
     }
+
+#if UNITY_ANDROID
+    private void OnValidate()
+    {
+        if (rb is null) rb = GetComponent<Rigidbody>();
+        if (rb.useGravity) rb.useGravity= false;
+    }
+#endif
 }
 
 /*    private void Update()
