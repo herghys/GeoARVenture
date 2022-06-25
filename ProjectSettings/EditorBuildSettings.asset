@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SplashScreen.unity
+    path: Assets/Scenes/Menu/SplashScreen.unity
     guid: 1751fd7f2b013de4ea45e1c19e145989
   - enabled: 1
-    path: Assets/Scenes/New Scene.unity
+    path: Assets/Scenes/Menu/New Scene.unity
     guid: abfb40709867592439c412449f6d5a5a
   - enabled: 0
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/Menu/MainMenu.unity
     guid: 9bd48ed66d72187418e55087018f1564
   - enabled: 0
     path: Assets/Scenes/AR/AR_LP_Limas.unity
