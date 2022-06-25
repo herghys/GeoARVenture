@@ -7,24 +7,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Animator))]
 public class ARShapeLP : MonoBehaviour
 {
-    public ARShapeLuasStruct shapeStructure;
-
-    [SerializeField] Animator animator;
-    [SerializeField] bool isPlaying = false;
-    [SerializeField] GameObject playAnimUI;
-
-    #region Lists
-    [SerializeField] List<GameObject> sisi;
-    [SerializeField] List<GameObject> jaring;
-    [SerializeField] List<bool> sisiActive;
-    [SerializeField] List<GameObject> texts;
-    #endregion
-
-    public UnityEvent OnAddEvent;
-    public UnityEvent OnRemoveEvent;
+    public ARShapeLuasStruct structure;
 
     IEnumerator animationCoroutine;
     string startAnimTrigger;
@@ -36,7 +21,7 @@ public class ARShapeLP : MonoBehaviour
         stopAnimTrigger = ShapeHelper.StopAnimTrigger;
 
         //animator = animator is null ? GetComponent<Animator>() : animator;
-        animator?.GetComponent<Animator>();
+        structure.animator?.GetComponent<Animator>();
     }
 
     private void Start()
@@ -47,7 +32,7 @@ public class ARShapeLP : MonoBehaviour
     #region Public
     public void ControlSide(int index)
     {
-        if (sisi[index].activeSelf) RemoveSides(index);
+        if (structure.sisi[index].activeSelf) RemoveSides(index);
         else InsertSides(index);
 
         CheckSides();
@@ -55,20 +40,19 @@ public class ARShapeLP : MonoBehaviour
 
     public void CheckSides()
     {
-        if (!sisiActive.All(val => val == true))
+        if (!structure.sisiActive.All(val => val == true))
         {
-            playAnimUI.SetActive(false);
-            return;
+            structure.playAnimUI.SetActive(false);
         }
 
-        if (sisiActive.Any(val => val == false))
+        if (structure.sisiActive.Any(val => val == false))
         {
-            playAnimUI.SetActive(false);
+            structure.playAnimUI.SetActive(false);
             animationCoroutine = IE_StopAnimation();
         }
         else 
         {
-            playAnimUI.SetActive(true);
+            structure.playAnimUI.SetActive(true);
             animationCoroutine = null;
         }
 
@@ -77,14 +61,14 @@ public class ARShapeLP : MonoBehaviour
 
     public void PlayAnimation()
     {
-        animator.ResetTrigger(stopAnimTrigger);
+        structure.animator.ResetTrigger(stopAnimTrigger);
         animationCoroutine = IE_StartAnimation();
         PlayCoroutine(animationCoroutine);
     }
 
     public void StopAnimation()
     {
-        animator.ResetTrigger(startAnimTrigger);
+        structure.animator.ResetTrigger(startAnimTrigger);
         animationCoroutine = IE_StopAnimation();
         PlayCoroutine(animationCoroutine);
     }
@@ -92,68 +76,58 @@ public class ARShapeLP : MonoBehaviour
 
     private void InsertSides(int index)
     {
-        sisi[index].SetActive(true);
-        sisiActive[index] = sisi[index].activeSelf;
+        structure.sisi[index].SetActive(true);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        CheckSides();
+        structure.OnRemoveEvent?.Invoke();
     }
 
     private void RemoveSides(int index)
     {
-        sisi[index].SetActive(false);
-        sisiActive[index] = sisi[index].activeSelf;
-        OnRemoveEvent?.Invoke();
+        structure.sisi[index].SetActive(false);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        CheckSides();
+        structure.OnRemoveEvent?.Invoke();
     }
 
     #region  Coroutines
     IEnumerator IE_StartAnimation()
     {
-        for (int i = 0; i < texts.Count; i++)
+        for (int i = 0; i < structure.texts.Count; i++)
         {
             yield return new WaitForSeconds(0.25f);
-            texts[i].SetActive(true);
-        }
-        yield return new WaitForEndOfFrame();
-        if (jaring.Count != 0)
-        {
-            foreach (var item in jaring)
-            {
-                yield return new WaitForSeconds(0.25f);
-                item.gameObject.SetActive(true);
-            }
+            structure.texts[i].SetActive(true);
         }
         yield return new WaitForEndOfFrame();
 
-        animator.ResetTrigger(stopAnimTrigger);
-        animator.SetTrigger(startAnimTrigger);
-        while (!animator.IsInTransition(0))
+        structure.animator.ResetTrigger(stopAnimTrigger);
+        structure.animator.SetTrigger(startAnimTrigger);
+        while (!structure.animator.IsInTransition(0))
         {
             yield return null;
         }
-        animator.ResetTrigger(startAnimTrigger);
+
+        yield return new WaitForSeconds(0.5f);
+        structure.animator.ResetTrigger(startAnimTrigger);
         yield return null;
     }
 
     IEnumerator IE_StopAnimation()
     {
-        animator.SetTrigger(stopAnimTrigger);
-        while (!animator.IsInTransition(0))
+        structure.animator.SetTrigger(stopAnimTrigger);
+        while (!structure.animator.IsInTransition(0))
         {
             yield return null;
         }
         yield return new WaitForEndOfFrame();
-        if (jaring.Count != 0)
-        {
-            foreach (var item in jaring)
-            {
-                yield return new WaitForSeconds(0.25f);
-                item.gameObject.SetActive(false);
-            }
-        }
-        foreach (var text in texts)
+
+        foreach (var text in structure.texts)
         {
             yield return new WaitForSeconds(0.25f);
             text.SetActive(false);
         }
-        animator.ResetTrigger(stopAnimTrigger);
+        yield return new WaitForSeconds(0.5f);
+        structure.animator.ResetTrigger(stopAnimTrigger);
         yield return null;
     }
     #endregion

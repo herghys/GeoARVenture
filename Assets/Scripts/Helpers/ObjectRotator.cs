@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Rigidbody))]
 public class ObjectRotator : MonoBehaviour
 {
     public float pcRotationSpeed = 100f;

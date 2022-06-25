@@ -30,12 +30,12 @@ public struct ARShapeLuasStruct
 {
     public Shape shapeType;
     public MateriType materiType;
+    public GameObject playAnimUI;
 
     public Animator animator;
 
     #region Luas Permukaan
     public List<GameObject> sisi;
-    public List<GameObject> jaring;
     public List<bool> sisiActive;
     public List<GameObject> texts;
     #endregion

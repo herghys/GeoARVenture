@@ -4,8 +4,6 @@ using UnityEngine;
 using TMPro;
 
 
-[RequireComponent(typeof(Transform))]
-[RequireComponent(typeof(ObjectRotator))]
 public class ObjectZoom : MonoBehaviour
 {
     [SerializeField] float scrollSpeed = 0.05f;
@@ -47,7 +45,6 @@ public class ObjectZoom : MonoBehaviour
         }
         {
             float scroll = Input.mouseScrollDelta.y;
-            Debug.Log(scroll);
 
             if (scroll < -0.5f)
                 Zoom(false);
