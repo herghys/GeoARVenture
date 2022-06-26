@@ -46,11 +46,11 @@ public struct ARShapeLuasStruct
 
     public Animator animator;
 
-    #region Luas Permukaan
+   /* #region Luas Permukaan
     public List<GameObject> sisi;
     public List<bool> sisiActive;
     public List<GameObject> texts;
-    #endregion
+    #endregion*/
 
     public UnityEvent OnAddEvent;
     public UnityEvent OnRemoveEvent;

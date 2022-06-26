@@ -17,11 +17,11 @@ public class ARShapeLP : MonoBehaviour
     #region  Unity Default
     private void Awake()
     {
-        startAnimTrigger = ShapeHelper.StartAnimTrigger;
-        stopAnimTrigger = ShapeHelper.StopAnimTrigger;
+        //startAnimTrigger = ShapeHelper.StartAnimTrigger;
+        //stopAnimTrigger = ShapeHelper.StopAnimTrigger;
 
         //animator = animator is null ? GetComponent<Animator>() : animator;
-        structure.animator?.GetComponent<Animator>();
+        //structure.animator?.GetComponent<Animator>();
     }
 
     private void Start()
@@ -34,15 +34,15 @@ public class ARShapeLP : MonoBehaviour
     #region Public
     public void ControlSide(int index)
     {
-        if (structure.sisi[index].activeSelf) RemoveSides(index);
+        /*if (structure.sisi[index].activeSelf) RemoveSides(index);
         else InsertSides(index);
 
-        CheckSides();
+        CheckSides();*/
     }
 
     public void CheckSides()
     {
-        if (!structure.sisiActive.All(val => val == true))
+        /*if (!structure.sisiActive.All(val => val == true))
         {
             structure.animator.ResetTrigger(stopAnimTrigger);
             structure.playAnimUI.SetActive(false);
@@ -61,7 +61,7 @@ public class ARShapeLP : MonoBehaviour
             animationCoroutine = null;
         }
 
-        PlayCoroutine(animationCoroutine);
+        PlayCoroutine(animationCoroutine);*/
     }
 
     public void PlayAnimation()
@@ -81,16 +81,16 @@ public class ARShapeLP : MonoBehaviour
 
     private void InsertSides(int index)
     {
-        structure.sisi[index].SetActive(true);
-        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        /*structure.sisi[index].SetActive(true);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;*/
         //CheckSides();
         structure.OnRemoveEvent?.Invoke();
     }
 
     private void RemoveSides(int index)
     {
-        structure.sisi[index].SetActive(false);
-        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        /*structure.sisi[index].SetActive(false);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;*/
         //CheckSides();
         structure.OnRemoveEvent?.Invoke();
     }
@@ -98,7 +98,8 @@ public class ARShapeLP : MonoBehaviour
     #region  Coroutines
     IEnumerator IE_StartAnimation()
     {
-        structure.animator.ResetTrigger(stopAnimTrigger);
+        yield return null;
+        /*structure.animator.ResetTrigger(stopAnimTrigger);
         for (int i = 0; i < structure.texts.Count; i++)
         {
             yield return new WaitForSeconds(0.25f);
@@ -115,12 +116,13 @@ public class ARShapeLP : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         structure.animator.ResetTrigger(startAnimTrigger);
-        yield return null;
+        yield return null;*/
     }
 
     IEnumerator IE_StopAnimation()
     {
-        structure.animator.ResetTrigger(startAnimTrigger);
+        yield return null;
+        /*structure.animator.ResetTrigger(startAnimTrigger);
         structure.animator.SetTrigger(stopAnimTrigger);
         while (!structure.animator.IsInTransition(0))
         {
@@ -135,7 +137,7 @@ public class ARShapeLP : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         structure.animator.ResetTrigger(stopAnimTrigger);
-        yield return null;
+        yield return null;*/
     }
     #endregion
 
