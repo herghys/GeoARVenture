@@ -11,26 +11,32 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/MainMenu.unity
     guid: 9bd48ed66d72187418e55087018f1564
-  - enabled: 0
-    path: Assets/Scenes/AR/AR_Unsur_Kubus.unity
-    guid: 27d1caf093b414d498a97c6762b0facf
   - enabled: 1
-    path: Assets/Scenes/AR/AR_Unsur_Limas.unity
-    guid: 5852677d24939fc4380353da705d843b
+    path: Assets/Scenes/AR/Unsur/AR_Unsur_Kubus.unity
+    guid: 527c47be160b8c84badc8b3e041da742
   - enabled: 1
-    path: Assets/Scenes/AR/AR_Unsur_Prisma.unity
+    path: Assets/Scenes/AR/Unsur/AR_Unsur_Limas.unity
+    guid: 704ae7e33e4d6f44bac2cb79eec203a3
+  - enabled: 1
+    path: Assets/Scenes/AR/Unsur/AR_Unsur_Prisma.unity
     guid: ed268fe45be0a2b4b9ad177aa4ba2f21
   - enabled: 1
-    path: Assets/Scenes/AR/AR_LP_Kubus.unity
+    path: Assets/Scenes/AR/Luas/AR_LP_Kubus.unity
     guid: abc4a609796d3604db7b373def2ccc1b
+  - enabled: 1
+    path: Assets/Scenes/AR/Luas/AR_LP_Prisma.unity
+    guid: 49eaa87df99d7ee4181d5569d16f39ce
+  - enabled: 1
+    path: Assets/Scenes/AR/Luas/AR_LP_Limas.unity
+    guid: 754b8925212f7f34c8f606f9b24da34d
   - enabled: 0
-    path: Assets/Scenes/AR/AR_Volume_Kubus.unity
+    path: Assets/Scenes/AR/Volume/AR_Volume_Kubus.unity
     guid: 9ab7715a123c057429adf54ee46ac1e5
   - enabled: 1
-    path: Assets/Scenes/AR/AR_Volume_Limas.unity
+    path: Assets/Scenes/AR/Volume/AR_Volume_Limas.unity
     guid: 994f4853cf6ccc441a3c90bbf950443c
   - enabled: 1
-    path: Assets/Scenes/AR/AR_Volume_Prisma.unity
+    path: Assets/Scenes/AR/Volume/AR_Volume_Prisma.unity
     guid: 65af26008864d424abc71835eb0c5b20
   - enabled: 0
     path: Assets/Scenes/Menu/New Scene.unity
