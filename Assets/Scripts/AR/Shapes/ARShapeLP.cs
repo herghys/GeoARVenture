@@ -27,8 +27,6 @@ public class ARShapeLP : MonoBehaviour
     private void Start()
     {
         CheckSides();
-        /*structure.animator.ResetTrigger(startAnimTrigger);
-        structure.animator.ResetTrigger(stopAnimTrigger);*/
     }
     #endregion
     #region Public
@@ -44,14 +42,11 @@ public class ARShapeLP : MonoBehaviour
     {
         /*if (!structure.sisiActive.All(val => val == true))
         {
-            structure.animator.ResetTrigger(stopAnimTrigger);
             structure.playAnimUI.SetActive(false);
-            return;
         }
 
         if (structure.sisiActive.Any(val => val == false))
         {
-            structure.animator.ResetTrigger(stopAnimTrigger);
             structure.playAnimUI.SetActive(false);
             animationCoroutine = IE_StopAnimation();
         }
@@ -81,25 +76,40 @@ public class ARShapeLP : MonoBehaviour
 
     private void InsertSides(int index)
     {
+<<<<<<< HEAD
         /*structure.sisi[index].SetActive(true);
         structure.sisiActive[index] = structure.sisi[index].activeSelf;*/
         //CheckSides();
+=======
+        structure.sisi[index].SetActive(true);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        CheckSides();
+>>>>>>> parent of f550f37 (Kelupaan)
         structure.OnRemoveEvent?.Invoke();
     }
 
     private void RemoveSides(int index)
     {
+<<<<<<< HEAD
         /*structure.sisi[index].SetActive(false);
         structure.sisiActive[index] = structure.sisi[index].activeSelf;*/
         //CheckSides();
+=======
+        structure.sisi[index].SetActive(false);
+        structure.sisiActive[index] = structure.sisi[index].activeSelf;
+        CheckSides();
+>>>>>>> parent of f550f37 (Kelupaan)
         structure.OnRemoveEvent?.Invoke();
     }
 
     #region  Coroutines
     IEnumerator IE_StartAnimation()
     {
+<<<<<<< HEAD
         yield return null;
         /*structure.animator.ResetTrigger(stopAnimTrigger);
+=======
+>>>>>>> parent of f550f37 (Kelupaan)
         for (int i = 0; i < structure.texts.Count; i++)
         {
             yield return new WaitForSeconds(0.25f);
@@ -107,7 +117,7 @@ public class ARShapeLP : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
 
-       
+        structure.animator.ResetTrigger(stopAnimTrigger);
         structure.animator.SetTrigger(startAnimTrigger);
         while (!structure.animator.IsInTransition(0))
         {
@@ -121,8 +131,11 @@ public class ARShapeLP : MonoBehaviour
 
     IEnumerator IE_StopAnimation()
     {
+<<<<<<< HEAD
         yield return null;
         /*structure.animator.ResetTrigger(startAnimTrigger);
+=======
+>>>>>>> parent of f550f37 (Kelupaan)
         structure.animator.SetTrigger(stopAnimTrigger);
         while (!structure.animator.IsInTransition(0))
         {
