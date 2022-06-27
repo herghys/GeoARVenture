@@ -27,6 +27,8 @@ public class ARShapeLP : MonoBehaviour
     private void Start()
     {
         CheckSides();
+        /*structure.animator.ResetTrigger(startAnimTrigger);
+        structure.animator.ResetTrigger(stopAnimTrigger);*/
     }
     #endregion
     #region Public
@@ -42,11 +44,14 @@ public class ARShapeLP : MonoBehaviour
     {
         if (!structure.sisiActive.All(val => val == true))
         {
+            structure.animator.ResetTrigger(stopAnimTrigger);
             structure.playAnimUI.SetActive(false);
+            return;
         }
 
         if (structure.sisiActive.Any(val => val == false))
         {
+            structure.animator.ResetTrigger(stopAnimTrigger);
             structure.playAnimUI.SetActive(false);
             animationCoroutine = IE_StopAnimation();
         }
@@ -78,7 +83,7 @@ public class ARShapeLP : MonoBehaviour
     {
         structure.sisi[index].SetActive(true);
         structure.sisiActive[index] = structure.sisi[index].activeSelf;
-        CheckSides();
+        //CheckSides();
         structure.OnRemoveEvent?.Invoke();
     }
 
@@ -86,13 +91,14 @@ public class ARShapeLP : MonoBehaviour
     {
         structure.sisi[index].SetActive(false);
         structure.sisiActive[index] = structure.sisi[index].activeSelf;
-        CheckSides();
+        //CheckSides();
         structure.OnRemoveEvent?.Invoke();
     }
 
     #region  Coroutines
     IEnumerator IE_StartAnimation()
     {
+        structure.animator.ResetTrigger(stopAnimTrigger);
         for (int i = 0; i < structure.texts.Count; i++)
         {
             yield return new WaitForSeconds(0.25f);
@@ -100,7 +106,7 @@ public class ARShapeLP : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
 
-        structure.animator.ResetTrigger(stopAnimTrigger);
+       
         structure.animator.SetTrigger(startAnimTrigger);
         while (!structure.animator.IsInTransition(0))
         {
@@ -114,6 +120,7 @@ public class ARShapeLP : MonoBehaviour
 
     IEnumerator IE_StopAnimation()
     {
+        structure.animator.ResetTrigger(startAnimTrigger);
         structure.animator.SetTrigger(stopAnimTrigger);
         while (!structure.animator.IsInTransition(0))
         {

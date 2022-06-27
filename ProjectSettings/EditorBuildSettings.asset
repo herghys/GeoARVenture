@@ -11,14 +11,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/MainMenu.unity
     guid: 9bd48ed66d72187418e55087018f1564
-  - enabled: 1
-    path: Assets/Scenes/AR/AR_LP_Kubus.unity
+  - enabled: 0
+    path: Assets/Scenes/;/AR_LP_Kubus.unity
     guid: 0efcf953b8f6a03458433d40804790fb
-  - enabled: 1
-    path: Assets/Scenes/AR/AR_LP_Limas.unity
+  - enabled: 0
+    path: Assets/Scenes/;/AR_LP_Limas.unity
     guid: 265eecf96cab04347b83ed28c52b5139
-  - enabled: 1
-    path: Assets/Scenes/AR/AR_LP_Prisma.unity
+  - enabled: 0
+    path: Assets/Scenes/;/AR_LP_Prisma.unity
     guid: 217b0efdd2b96b14096a37e51c22ed95
   - enabled: 0
     path: Assets/Scenes/AR/AR_Unsur_Kubus.unity

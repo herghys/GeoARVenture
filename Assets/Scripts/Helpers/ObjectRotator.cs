@@ -5,19 +5,18 @@ using UnityEngine.EventSystems;
 
 public class ObjectRotator : MonoBehaviour
 {
-    public float pcRotationSpeed = 100f;
-    public float mobileRotationSpeed = 80f;
-
     float speed;
+
     [SerializeField] bool isDragging;
 
+    public float pcRotationSpeed = 100f;
+    public float mobileRotationSpeed = 80f;
     public Camera cam;
-
     public Rigidbody rb;
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [SerializeField] bool useAndroid;
-#endif
+    #endif
 
     private void Awake()
     {
@@ -25,18 +24,6 @@ public class ObjectRotator : MonoBehaviour
 
         SetInitialSpeed();
         SetRigidBody();
-    }
-
-    void SetInitialSpeed()
-    {
-#if UNITY_EDITOR
-        if (!useAndroid) speed = pcRotationSpeed;
-        else speed = mobileRotationSpeed;
-#elif UNITY_ANDROID
-        speed = mobileRotationSpeed;
-#else
-        speed = pcRotationSpeed;
-#endif
     }
 
     private void Update()
@@ -48,6 +35,23 @@ public class ObjectRotator : MonoBehaviour
             else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 isDragging = false;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Drag();
+    }
+
+    void SetInitialSpeed()
+    {
+    #if UNITY_EDITOR
+        if (!useAndroid) speed = pcRotationSpeed;
+        else speed = mobileRotationSpeed;
+    #elif UNITY_ANDROID
+        speed = mobileRotationSpeed;
+    #else
+        speed = pcRotationSpeed;
+    #endif
     }
 
     void SetRigidBody()
@@ -69,7 +73,7 @@ public class ObjectRotator : MonoBehaviour
         }
     }
 
-#if !UNITY_ANDROID
+
     private void OnMouseDrag()
     {
         isDragging = true;
@@ -79,12 +83,7 @@ public class ObjectRotator : MonoBehaviour
     {
         isDragging = false;
     }
-#endif
 
-    private void FixedUpdate()
-    {
-        Drag();
-    }
 
 #if UNITY_ANDROID
     private void OnValidate()
@@ -94,21 +93,3 @@ public class ObjectRotator : MonoBehaviour
     }
 #endif
 }
-
-/*    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0))
-            isDragging = false;
-    }*/
-
-/*float rotX = Input.GetAxis("Mouse X") * pcRotationSpeed * Mathf.Deg2Rad;
-float rotY = Input.GetAxis("Mouse Y") * pcRotationSpeed * Mathf.Deg2Rad;
-
-transform.Rotate(Vector3.up, -rotX);
-transform.Rotate(Vector3.right, rotY);*/
-
-/*transform.Rotate(Vector3.down, rotX);
-transform.Rotate(Vector3.right, rotY);*/
-
-/*float rotX = Input.GetAxis("Mouse X") * speed * Time.fixedDeltaTime;
-float rotY = Input.GetAxis("Mouse Y") * speed * Time.fixedDeltaTime;*/
