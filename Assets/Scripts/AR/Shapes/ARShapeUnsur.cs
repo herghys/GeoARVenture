@@ -5,6 +5,7 @@ using QO = QuickOutline;
 
 public class ARShapeUnsur : MonoBehaviour
 {
+    [SerializeField] Color highlightColor;
     [SerializeField] QO.Outline outline;
     [SerializeField] List<QO.Outline> outlines;
 
@@ -13,6 +14,12 @@ public class ARShapeUnsur : MonoBehaviour
         if (outline == null) outline = GetComponent<QO.Outline>();
     }
 
+    public void ChangeColor(MeshRenderer renderer)
+    {
+
+        if (gameObject.activeSelf)
+            StartCoroutine(IE_ChangeColor(renderer));
+    }
     public void Highlight()
     {
         if (gameObject.activeSelf)
@@ -29,6 +36,16 @@ public class ARShapeUnsur : MonoBehaviour
             if (item == _outline)
                 StartCoroutine(IE_Highlight(_outline));
         }
+    }
+
+    IEnumerator IE_ChangeColor(MeshRenderer renderer)
+    {
+        var startColor = renderer.material.color;
+
+        renderer.material.color = highlightColor;
+        yield return new WaitForSeconds(1.5f);
+        renderer.material.color = startColor;
+        yield return null;
     }
     IEnumerator IE_Highlight(QO.Outline _outline)
     {

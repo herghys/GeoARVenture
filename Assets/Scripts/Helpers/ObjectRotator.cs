@@ -10,7 +10,7 @@ public class ObjectRotator : MonoBehaviour
     [SerializeField] bool isDragging;
 
     public float pcRotationSpeed = 100f;
-    public float mobileRotationSpeed = 80f;
+    public float mobileRotationSpeed = 50f;
     public Camera cam;
     public Rigidbody rb;
 
@@ -21,6 +21,9 @@ public class ObjectRotator : MonoBehaviour
     private void Awake()
     {
         if (rb is null) rb = gameObject.AddComponent<Rigidbody>();
+#if UNITY_ANDROID
+        mobileRotationSpeed = 40f;
+#endif
 
         SetInitialSpeed();
         SetRigidBody();
@@ -44,19 +47,23 @@ public class ObjectRotator : MonoBehaviour
 
     void SetInitialSpeed()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!useAndroid) speed = pcRotationSpeed;
         else speed = mobileRotationSpeed;
-    #elif UNITY_ANDROID
+#elif UNITY_ANDROID
         speed = mobileRotationSpeed;
-    #else
+#else
         speed = pcRotationSpeed;
-    #endif
+#endif
     }
 
     void SetRigidBody()
     {
+#if UNITY_ANDROID || UNITY_IOS
+        rb.drag = speed * 0.75f * 4f;
+#else
         rb.drag = speed * 0.75f;
+#endif
         rb.angularDrag = 1;
         rb.useGravity = false;
     }
@@ -73,7 +80,7 @@ public class ObjectRotator : MonoBehaviour
         }
     }
 
-
+#if UNITY_EDITOR
     private void OnMouseDrag()
     {
         isDragging = true;
@@ -83,7 +90,7 @@ public class ObjectRotator : MonoBehaviour
     {
         isDragging = false;
     }
-
+#endif
 
 #if UNITY_ANDROID
     private void OnValidate()
