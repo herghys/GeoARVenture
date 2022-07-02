@@ -29,17 +29,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AR/Luas/AR_LP_Limas.unity
     guid: 754b8925212f7f34c8f606f9b24da34d
-  - enabled: 0
-    path: Assets/Scenes/AR/Volume/AR_Volume_Kubus.unity
-    guid: 9ab7715a123c057429adf54ee46ac1e5
+  - enabled: 1
+    path: Assets/Scenes/AR/Volume/AR_Volume_Cuboid.unity
+    guid: 3a6f40df30efaad4498af86dd875593f
   - enabled: 1
     path: Assets/Scenes/AR/Volume/AR_Volume_Limas.unity
     guid: 994f4853cf6ccc441a3c90bbf950443c
   - enabled: 1
     path: Assets/Scenes/AR/Volume/AR_Volume_Prisma.unity
     guid: 65af26008864d424abc71835eb0c5b20
-  - enabled: 0
-    path: Assets/Scenes/Menu/New Scene.unity
-    guid: abfb40709867592439c412449f6d5a5a
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 954542335471a4142a70336163f3bfb4, type: 2}

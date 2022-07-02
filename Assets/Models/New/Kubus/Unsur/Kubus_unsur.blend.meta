@@ -3,7 +3,47 @@ guid: 78fe98e9d74f84945b66a4f8d490d55e
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hijau
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: biru muda
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: biru muda.001
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kuning
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: merah
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oren
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: putih
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ungu
+    second: {fileID: 2100000, guid: 59f63ba2ee2dbfb42afc16220a9c0463, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
