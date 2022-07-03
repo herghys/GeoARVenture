@@ -21,6 +21,7 @@ namespace ARMath.Exercise
 		[SerializeField] bool inputYesNoAnswer;
 
 		[Header("Questions")]
+		[SerializeField] int question3DIndex;
 		[SerializeField] int totalBaseQuestion;
 		[SerializeField] int baseQuestionIndex;
 		[SerializeField] int totalMainQuestions;
@@ -61,6 +62,7 @@ namespace ARMath.Exercise
 			GetTotalBaseQuestion();
 			baseQuestionIndex = 0;
 			mainQuestionIndex = 0;
+			question3DIndex = 0;
 			isEnd = false;
 			LoadQuestion();
 		}
@@ -161,6 +163,10 @@ namespace ARMath.Exercise
 				mainQuestionIndex++;
 				LoadQuestion();
 				return;
+			}
+			if (question3DIndex < question3DModel.Count)
+			{
+				question3DIndex++;
 			}
 
 			baseQuestionIndex++;
