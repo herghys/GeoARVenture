@@ -8,6 +8,7 @@ public class ObjectRotator : MonoBehaviour
     float speed;
 
     [SerializeField] bool isDragging;
+    [SerializeField] Vector3 intialPos;
 
     public float pcRotationSpeed = 100f;
     public float mobileRotationSpeed = 50f;
@@ -24,7 +25,7 @@ public class ObjectRotator : MonoBehaviour
 #if UNITY_ANDROID
         mobileRotationSpeed = 40f;
 #endif
-
+        intialPos = transform.localPosition;
         SetInitialSpeed();
         SetRigidBody();
     }
@@ -43,6 +44,9 @@ public class ObjectRotator : MonoBehaviour
     private void FixedUpdate()
     {
         Drag();
+        if (transform.localPosition != intialPos){
+            transform.localPosition = intialPos;
+        }
     }
 
     void SetInitialSpeed()
