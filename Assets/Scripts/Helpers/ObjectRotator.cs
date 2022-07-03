@@ -39,14 +39,16 @@ public class ObjectRotator : MonoBehaviour
             else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 isDragging = false;
         }
-    }
+
+		if (transform.localPosition.x != intialPos.x ||
+            transform.localPosition.y != intialPos.y ||
+            transform.localPosition.z != intialPos.z)
+			transform.localPosition = intialPos;
+	}
 
     private void FixedUpdate()
     {
         Drag();
-        if (transform.localPosition != intialPos){
-            transform.localPosition = intialPos;
-        }
     }
 
     void SetInitialSpeed()
@@ -76,10 +78,13 @@ public class ObjectRotator : MonoBehaviour
     {
         if (isDragging)
         {
+
             float rotX = Input.GetAxis("Mouse X") * speed * Time.fixedDeltaTime;
             float rotY = Input.GetAxis("Mouse Y") * speed * Time.fixedDeltaTime;
 
+            if (rotX != 0)
             rb.AddTorque(Vector3.down * rotX);
+            if (rotY != 0)
             rb.AddTorque(Vector3.right * rotY);
         }
     }
