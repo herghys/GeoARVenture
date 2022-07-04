@@ -70,6 +70,7 @@ namespace ARMath.Exercise
 		public void Reset()
 		{
 			Init();
+			StartCoroutine(Change3DModel());
 			ui.Reset();
 		}
 
@@ -157,28 +158,47 @@ namespace ARMath.Exercise
 				return;
 			}
 
+			
 			ui.SubmitAnswer(state, false);
-			if (mainQuestionIndex != totalMainQuestions - 1)
-			{
-				mainQuestionIndex++;
-				LoadQuestion();
-				return;
-			}
 			if (question3DIndex < question3DModel.Count)
 			{
 				question3DIndex++;
 			}
 
+			if (mainQuestionIndex != totalMainQuestions - 1)
+			{
+				mainQuestionIndex++;
+				LoadQuestion();
+				StartCoroutine(Change3DModel());
+				return;
+			}
+			
+
 			baseQuestionIndex++;
 			if (baseQuestionIndex < totalBaseQuestion)
 			{
 				mainQuestionIndex = 0;
+				StartCoroutine(Change3DModel());
 				LoadQuestion();
 			}
 			if (baseQuestionIndex >= totalBaseQuestion - 1)
 			{
 				isEnd = true;
 			}
+		}
+
+		public IEnumerator Change3DModel()
+		{
+			
+			yield return new WaitForSeconds(0.1f);
+			for (int i = 0; i < question3DModel.Count; i++)
+			{
+				yield return null;
+				question3DModel[i].SetActive(false);
+				if (i == question3DIndex)
+				question3DModel[question3DIndex].SetActive(true);
+			}
+			
 		}
 
 		#region Event Handler
