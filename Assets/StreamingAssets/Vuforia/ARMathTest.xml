@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="Latihan_Soal" size="1.000000 1.497191" />
     <ImageTarget name="Vol_Prisma" size="1.000000 1.499266" />
     <ImageTarget name="Vol_Limas" size="1.000000 1.499266" />
     <ImageTarget name="Vol_Cubicle" size="1.000000 1.499266" />

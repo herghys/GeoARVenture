@@ -34,7 +34,9 @@ public class ARVolumeCuboid : MonoBehaviour
     }
 
     private void CheckFillState(){
-         if (fillState.All (x => x == false)){
+		prevButton.interactable = true;
+		nextButton.interactable = true;
+		if (fillState.All (x => x == false)){
             prevButton.interactable = false;
         }else if (fillState.All (x => x == true)){
             nextButton.interactable = false;

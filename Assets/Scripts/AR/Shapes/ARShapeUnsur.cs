@@ -7,6 +7,7 @@ using QO = QuickOutline;
 public class ARShapeUnsur : MonoBehaviour
 {   
     [SerializeField] ARManagerUnsur manager;
+    [SerializeField] Material changeMaterial;
     [SerializeField] Color highlightColor = new Color(255,121,210, 255);
     [SerializeField] QO.Outline outline;
     [SerializeField] List<QO.Outline> outlines;
@@ -22,13 +23,13 @@ public class ARShapeUnsur : MonoBehaviour
     {   
         if (manager.IsAnimating) return;
         if (gameObject.activeSelf)
-            StartCoroutine(IE_ChangeColor(renderer));
+            StartCoroutine(IE_ChangeColor(renderer, changeMaterial));
     }
 
     public void ChangeColor(){
         if(manager.IsAnimating)return;
         if (gameObject.activeSelf)
-            StartCoroutine(IE_ChangeColor(meshRender));
+            StartCoroutine(IE_ChangeColor(meshRender, changeMaterial));
 
     }
     public void Highlight()
@@ -51,14 +52,38 @@ public class ARShapeUnsur : MonoBehaviour
         }
     }
 
+    IEnumerator IE_ChangeColor(MeshRenderer renderer, Material mat)
+    {
+        var startMat = renderer.material ;
+
+        renderer.material = changeMaterial;
+		//renderer.material.color = highlightColor;
+		yield return new WaitForSeconds(1.5f);
+
+        renderer.material = startMat;
+		//renderer.material.color = startColor;
+		yield return null;
+	}
+
     IEnumerator IE_ChangeColor(MeshRenderer renderer)
     {   
 
         var startColor = renderer.material.color;
 
-        renderer.material.color = highlightColor;
+        foreach (var item in renderer.materials)
+        {
+            yield return null;
+            item.color = highlightColor;
+        }
+        //renderer.material.color = highlightColor;
         yield return new WaitForSeconds(1.5f);
-        renderer.material.color = startColor;
+
+        foreach (var item in renderer.materials)
+        {
+            yield return null;
+            item.color = startColor;
+        }
+        //renderer.material.color = startColor;
         yield return null;
     }
     IEnumerator IE_Highlight(QO.Outline _outline)

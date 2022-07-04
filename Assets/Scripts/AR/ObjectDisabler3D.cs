@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class ObjectDisabler3D : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public bool isDisabled;
     public MeshRenderer renderer;
     public UnityEvent OnDisableEvent;
     private float clickDeltaTime = 0.3F;
@@ -33,6 +34,7 @@ public class ObjectDisabler3D : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             Debug.Log($"{this}.Clicked");
             renderer.enabled = false;
+            isDisabled = true;
             //gameObject.SetActive(false);
             OnDisableEvent?.Invoke();
         }
@@ -41,7 +43,16 @@ public class ObjectDisabler3D : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     }
     public void EnableObject()
     {
-        renderer.enabled = true;
+		isDisabled = false;
+		renderer.enabled = true;
+        
+    }
+
+    public void DisableObject()
+    {
+		isDisabled = true;
+		renderer.enabled = false;
+        
     }
 
     [ContextMenu("Get")]

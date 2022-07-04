@@ -20,12 +20,12 @@ MonoBehaviour:
   - questionText: Panjang diagonal bidang BE
     answers:
       answerInfo: 10
-      yesNoAnswer: 0
+      yesNoAnswerInfo: 0
       hasSymbol: 0
       symbol: 
   - questionText: Luas bidang diagonal BCHE
     answers:
       answerInfo: 40
-      yesNoAnswer: 0
+      yesNoAnswerInfo: 0
       hasSymbol: 0
       symbol: 
