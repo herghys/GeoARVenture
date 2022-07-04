@@ -19,6 +19,24 @@ namespace ARMath.Managers
                 ui = GetComponent<MainMenuUIManager>();
         }
 
+        private void Start()
+        {
+            StartCoroutine(InitFirstScene());
+        }
+
+        IEnumerator InitFirstScene()
+        {
+            if (MainMenuNav.Instance.ParentUIWindowIndex != -1)
+            {
+                OpenContextMenu(ui.ContextWindows[MainMenuNav.Instance.ParentUIWindowIndex]);
+                ui.ContextWindows[MainMenuNav.Instance.ParentUIWindowIndex].mayDisable = false;
+            }
+
+            yield return new WaitForSeconds(0.3f);
+			if (MainMenuNav.Instance.UIWindowIndex != -1)
+				OpenContextMenu(ui.ContextWindows[MainMenuNav.Instance.UIWindowIndex]);
+		}
+
         #region Context Menu Control
         public void OpenContextMenu(UIWindow window)
         {
@@ -29,10 +47,18 @@ namespace ARMath.Managers
         {
             ui.CloseUI(window);
         }
-        #endregion
 
-        #region Scene Loader
-        public void LoadScene(string scene)
+        public void RemoveLastParentWindow() => MainMenuNav.Instance.ParentUIWindowIndex = -1;
+
+		public void SetLastParentWindow(UIWindow window) => MainMenuNav.Instance.ParentUIWindowIndex = ui.ContextWindows.IndexOf(window);
+
+        public void RemoveLastWindow() => MainMenuNav.Instance.UIWindowIndex = -1;
+
+		public void SetLastWindow(UIWindow window) => MainMenuNav.Instance.UIWindowIndex = ui.ContextWindows.IndexOf(window);
+		#endregion
+
+		#region Scene Loader
+		public void LoadScene(string scene)
         {
             ui.StartLoadLevel();
             StartCoroutine(Load(scene));

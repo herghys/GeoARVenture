@@ -19,6 +19,7 @@ namespace ARMath.Managers
 
         [Header("UI Windows")]
         [SerializeField] internal List<UIWindow> contextWindows;
+        public List<UIWindow> ContextWindows { get => contextWindows; }
 
         public delegate void Fade(AsyncOperation op);
         public Fade StartFade;
