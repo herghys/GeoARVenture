@@ -35,6 +35,7 @@ namespace ARMath.Managers
         }
         internal void OpenUI(UIWindow window)
         {
+            window.gameObject.SetActive(true);
             window.Enable();
             foreach (var item in contextWindows)
             {

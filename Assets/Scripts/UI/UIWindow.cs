@@ -25,6 +25,8 @@ namespace ARMath.UI
         #region Enable/Disable
         public void Enable()
         {
+            gameObject.SetActive(true);
+
             Vector3 direction = Vector3.zero;
             ControlUI(direction, active: true);
         }
@@ -50,16 +52,25 @@ namespace ARMath.UI
         #region OpenClose
         void ControlUI(Vector3 direction, float duration = 0.5f, bool active = false)
         {
-            StartCoroutine(MoveWindow(direction, duration));
+			if (!gameObject.activeSelf) return;
+			StartCoroutine(MoveWindow(direction, duration, active));
             isActive = active;
         }
         #endregion
 
-        private IEnumerator MoveWindow(Vector3 orientation, float _duration)
+        private IEnumerator MoveWindow(Vector3 orientation, float _duration, bool active)
         {
             tweener = transform.DOLocalMove(orientation, _duration);
-            tweener.SetEase(Ease.InOutSine);
-            yield return tweener.AsyncWaitForCompletion();
+            yield return tweener.SetEase(Ease.InOutSine).AsyncWaitForCompletion();
+
+            while (tweener.IsPlaying())
+            {
+                yield return null;
+            }
+
+            gameObject.SetActive(active);
+            //yield return tweener.AsyncWaitForCompletion();
+            //gameObject.SetActive(active);
         }
     }
 }
