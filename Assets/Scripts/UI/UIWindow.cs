@@ -54,7 +54,6 @@ namespace ARMath.UI
         {
 			if (!gameObject.activeSelf) return;
 			StartCoroutine(MoveWindow(direction, duration, active));
-            isActive = active;
         }
         #endregion
 
@@ -69,8 +68,9 @@ namespace ARMath.UI
             }
 
             gameObject.SetActive(active);
-            //yield return tweener.AsyncWaitForCompletion();
-            //gameObject.SetActive(active);
-        }
+			isActive = active;
+			//yield return tweener.AsyncWaitForCompletion();
+			//gameObject.SetActive(active);
+		}
     }
 }

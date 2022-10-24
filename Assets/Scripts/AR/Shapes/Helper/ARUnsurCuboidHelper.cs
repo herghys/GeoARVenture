@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuboidTransformHelper : MonoBehaviour
+
+public class ARUnsurCuboidHelper : MonoBehaviour
 {
     [SerializeField] Transform reference;
     void OnEnable()
